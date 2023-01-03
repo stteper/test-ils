@@ -1,0 +1,7 @@
+.active td {
+    background-color: #b3e1f2;
+}
+
+.active td.ant-table-cell-row-hover {
+    background-color: #b3e1f2;
+}

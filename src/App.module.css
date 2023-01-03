@@ -1,0 +1,15 @@
+.main {
+  min-height: 100vh;
+}
+
+.header {
+  color: #fff;
+}
+
+.content {
+  padding: 16px 50px;
+}
+
+.column {
+  margin: 0.5rem 0;
+}
