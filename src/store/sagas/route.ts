@@ -2,8 +2,8 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 import Api from '../../HTTP/Api'
 import { Order } from '../../Interfaces/order'
-import { RouteApiData, RouteData } from '../../Interfaces/route'
-import { setRoute } from '../reducers/mapReducer'
+import { RouteApiData } from '../../Interfaces/route'
+import { setRoute, setWrongRoute } from '../reducers/mapReducer'
 import { SetDefaultOrderAction } from '../reducers/orderReducer'
 
 async function getRouteData(order: Order): Promise<RouteApiData> {
@@ -18,13 +18,15 @@ async function getRouteData(order: Order): Promise<RouteApiData> {
 
 function* fetchRoute(action: SetDefaultOrderAction) {
   const data: RouteApiData = yield call(getRouteData, action.payload)
-  const emptyData: RouteData = { routes: [], waypoints: [] }
 
   try {
-    const routeData: RouteData = data.code === 'Ok' ? { routes: data.routes, waypoints: data.waypoints } : emptyData
-    yield put(setRoute(routeData))
+    if (data.code !== 'Ok') {
+      throw new Error('Wrong data')
+    }
+
+    yield put(setRoute(data))
   } catch (err) {
-    yield put(setRoute(emptyData))
+    yield put(setWrongRoute())
   }
 }
 
