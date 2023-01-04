@@ -20,13 +20,13 @@ const App: React.FC = () => {
           </Header>
           <Content className={styles.content}>
             <Row gutter={[16, 16]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} xl={12}>
                 <Card title={'Заявки'}>
                   <OrderTable />
                 </Card>
               </Col>
 
-              <Col xs={24} md={12}>
+              <Col xs={24} xl={12}>
                 <Card title={'Карта'}>
                   <OrderMap />
                 </Card>

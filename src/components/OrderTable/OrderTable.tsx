@@ -1,7 +1,7 @@
 import { Table } from 'antd'
 import React, { useCallback } from 'react'
 
-import styles from './OrderTable.module.css'
+import styled from 'styled-components'
 
 import { useOrdersHook } from '../../hooks/useOrdersHook'
 import { Order } from '../../Interfaces/order'
@@ -18,6 +18,7 @@ const columns: ColumnsType<Order> = [
     title: '#',
     dataIndex: 'id',
     key: 'id',
+    responsive: ['sm'],
   },
   {
     title: 'Старт',
@@ -33,13 +34,22 @@ const columns: ColumnsType<Order> = [
   },
 ]
 
+const StyledTable = styled((props) => <Table {...props} />)`
+  && tbody > tr.active > td {
+    background-color: #b3e1f2;
+  }
+  && tbody > tr.active:hover > td {
+    background-color: #b3e1f2;
+  }
+`
+
 const OrderTable: React.FC = () => {
   const { orders, currentOrder, setCurrent } = useOrdersHook()
 
   const onRow = useCallback(
     (record: Order) => {
       return {
-        className: currentOrder && record.id === currentOrder.id ? styles.active : '',
+        className: currentOrder && record.id === currentOrder.id ? 'active' : '',
         onClick: () => {
           setCurrent(record)
         },
@@ -48,7 +58,7 @@ const OrderTable: React.FC = () => {
     [currentOrder, setCurrent],
   )
 
-  return <Table rowKey={'id'} onRow={onRow} dataSource={orders} columns={columns} />
+  return <StyledTable rowKey={'id'} onRow={onRow} dataSource={orders} columns={columns} />
 }
 
 export default OrderTable

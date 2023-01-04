@@ -17,7 +17,7 @@ const OrderMap: React.FC = () => {
         zoom={13}
         scrollWheelZoom={true}
         attributionControl={false}
-        style={{ height: 400 }}
+        style={{ height: 395 }}
       >
         <OrderInnerMap />
       </MapContainer>
