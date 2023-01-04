@@ -53,7 +53,8 @@
     "lint:es": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:es:fix": "npm run lint:es -- --fix",
     "lint:css": "stylelint src",
-    "lint:css:fix": "npm run lint:css -- --fix"
+    "lint:css:fix": "npm run lint:css -- --fix",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "*.(js|jsx|ts|tsx)": [
