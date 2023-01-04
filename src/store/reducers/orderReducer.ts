@@ -69,6 +69,7 @@ const initialState: OrderState = {
 }
 
 export const setDefaultOrder = createAction<Order>('orders/setDefault')
+export type SetDefaultOrderAction = ReturnType<typeof setDefaultOrder>
 
 const orderReducer = createReducer(initialState, (builder) => {
   builder.addCase(setDefaultOrder, (state, action) => {

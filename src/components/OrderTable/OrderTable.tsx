@@ -4,8 +4,8 @@ import React, { useCallback } from 'react'
 import styles from './OrderTable.module.css'
 
 import { useOrdersHook } from '../../hooks/useOrdersHook'
-import { Coordinate } from '../../Interfaces/coordinates'
 import { Order } from '../../Interfaces/order'
+import { Coordinate } from '../../Interfaces/route'
 
 import type { ColumnsType } from 'antd/es/table'
 
@@ -20,13 +20,13 @@ const columns: ColumnsType<Order> = [
     key: 'id',
   },
   {
-    title: 'From',
+    title: 'Старт',
     dataIndex: 'from',
     key: 'from',
     render: renderCoord,
   },
   {
-    title: 'To',
+    title: 'Финиш',
     dataIndex: 'to',
     key: 'to',
     render: renderCoord,

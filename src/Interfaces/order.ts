@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Coordinate } from './coordinates'
+import { Coordinate } from './route'
 
 export interface Order {
   id: React.Key
