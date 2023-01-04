@@ -18,7 +18,7 @@ const routeService: RouteService = (() => {
     const requestUrl = joinUrl(domain, url)
     const options = data ? { headers, method, body: JSON.stringify({ ...data }) } : { headers, method }
 
-    return fetch(requestUrl, options).then()
+    return fetch(requestUrl, options)
   }
   const get = (url: string, data?: object): Promise<Response> => {
     const method: HttpMethod = 'get'
