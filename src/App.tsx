@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Provider } from 'react-redux'
 
-import styles from './App.module.css'
+import './App.css'
 import OrderMap from './components/OrderMap/OrderMap'
 import OrderTable from './components/OrderTable/OrderTable'
 
@@ -14,11 +14,11 @@ const App: React.FC = () => {
   return (
     <>
       <Provider store={store}>
-        <Layout className={styles.main}>
+        <Layout className='main'>
           <Header>
-            <span className={styles.header}>Test Task</span>
+            <span className='header'>Test Task</span>
           </Header>
-          <Content className={styles.content}>
+          <Content className='content'>
             <Row gutter={[16, 16]}>
               <Col xs={24} xl={12}>
                 <Card title={'Заявки'}>
