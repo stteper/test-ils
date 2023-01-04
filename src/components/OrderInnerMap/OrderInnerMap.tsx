@@ -1,7 +1,7 @@
 import L, { latLngBounds } from 'leaflet'
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { Marker, Popup, useMap, GeoJSON, TileLayer, useMapEvents } from 'react-leaflet'
+import { Marker, Popup, useMap, GeoJSON, TileLayer } from 'react-leaflet'
 
 import { useRoutesHook } from '../../hooks/useRoutesHook'
 
@@ -16,24 +16,23 @@ const convertCoord = (lngLat: GeometryCoordinate): Coordinate => {
 
 const hash = require('object-hash')
 
+const zoomMapHandler = (parentMap: L.Map): void => {
+  const bounds = latLngBounds([])
+
+  parentMap.eachLayer((layer) => {
+    layer instanceof L.FeatureGroup && bounds.extend(layer.getBounds())
+    bounds.isValid() && parentMap.fitBounds(bounds)
+  })
+}
+
 const OrderInnerMap: React.FC = () => {
   const { waypoints, route } = useRoutesHook()
 
   const parentMap = useMap()
 
-  const zoomMapHandler = (): void => {
-    const bounds = latLngBounds([])
-
-    parentMap.eachLayer((layer) => {
-      layer instanceof L.FeatureGroup && bounds.extend(layer.getBounds())
-      bounds.isValid() && parentMap.fitBounds(bounds)
-    })
-  }
-
-  useMapEvents({
-    layerremove: zoomMapHandler,
-    layeradd: zoomMapHandler,
-  })
+  useEffect(() => {
+    zoomMapHandler(parentMap)
+  }, [route])
 
   const data: GeoJSON.Feature | null = route
     ? ({ type: 'Feature', geometry: route.geometry, properties: {} } as GeoJSON.Feature)
